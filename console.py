@@ -13,6 +13,7 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
+<<<<<<< HEAD
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
@@ -35,6 +36,52 @@ class HBNBCommand(cmd.Cmd):
         if not sys.__stdin__.isatty():
             print('(hbnb)')
 
+=======
+    """this class is entry point of the command interpreter
+    """
+    prompt = "(hbnb) "
+    all_classes = {"BaseModel", "User", "State", "City",
+                   "Amenity", "Place", "Review"}
+
+    def emptyline(self):
+        """Ignores empty spaces"""
+        pass
+
+    def do_quit(self, line):
+        """Quit command to exit the program"""
+        return True
+
+
+    def do_EOF(self, line):
+        """Quit command to exit the program at end of file"""
+        return True
+
+    def do_create(self, line):
+        """Creates a new instance of BaseModel, saves it
+        Exceptions:
+            SyntaxError: when there is no args given
+            NameError: when there is no object taht has the name
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = line.split(" ")
+            obj = eval("{}()".format(my_list[0]))
+            print("{}".format(obj.id))
+            for num in range(1, len(my_list)):
+                my_list[num] = my_list[num].replace('=', ' ')
+                attributes = split(my_list[num])
+                attributes[1] = attributes[1].replace('_', ' ')
+                try:
+                    var = eval(attributes[1])
+                    attributes[1] = var
+                except:
+                    pass
+                if type(attributes[1]) is not tuple:
+                    setattr(obj, attributes[0], attributes[1])
+            obj.save()
+
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
 
@@ -115,8 +162,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+<<<<<<< HEAD
         # Check if the argument is empty
         if not args:
+=======
+        try:
+            if not args:
+                raise SyntaxError()
+            arg_list = args.split(" ")
+            kw = {}
+            for arg in arg_list[1:]:
+                arg_splited = arg.split("=")
+                arg_splited[1] = eval(arg_splited[1])
+                if type(arg_splited[1]) is str:
+                    arg_splited[1] = arg_splited[1].replace("_", " ").replace('"', '\\"')
+                kw[arg_splited[0]] = arg_splited[1]
+        except SyntaxError:
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
             print("** class name missing **")
             return
         # Split the argument into a list of arguments (on each space)
@@ -127,6 +189,7 @@ class HBNBCommand(cmd.Cmd):
         # Check if the class exists
         if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
+<<<<<<< HEAD
             return
 
         # Create a new instance of the class
@@ -158,6 +221,10 @@ class HBNBCommand(cmd.Cmd):
             setattr(new_instance, key, value)
 
         storage.save()
+=======
+        new_instance = HBNBCommand.classes[arg_list[0]](**kw)
+        new_instance.save()
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
         print(new_instance.id)
         storage.save()
 
@@ -176,7 +243,33 @@ class HBNBCommand(cmd.Cmd):
         if c_id and ' ' in c_id:
             c_id = c_id.partition(' ')[0]
 
+<<<<<<< HEAD
         if not c_name:
+=======
+    def do_show(self, line):
+        """Prints the string representation of an instance
+        Exceptions:
+            SyntaxError: when there is no args given
+            NameError: when there is no object taht has the name
+            IndexError: when there is no id given
+            KeyError: when there is no valid id given
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = line.split(" ")
+            if my_list[0] not in self.all_classes:
+                raise NameError()
+            if len(my_list) < 2:
+                raise IndexError()
+            objects = storage.all()
+            key = my_list[0] + '.' + my_list[1]
+            if key in objects:
+                print(objects[key])
+            else:
+                raise KeyError()
+        except SyntaxError:
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
             print("** class name missing **")
             return
 
@@ -227,6 +320,21 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+<<<<<<< HEAD
+=======
+    def do_all(self, line):
+        """Prints all string representation of all instances
+        Exceptions:
+            NameError: when there is no object taht has the name
+        """
+        objects = storage.all()
+        my_list = []
+        if not line:
+            for key in objects:
+                my_list.append(objects[key])
+            print(my_list)
+
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
     def help_destroy(self):
         """ Help information for the destroy command """
         print("Destroys an individual instance of a class")
@@ -277,6 +385,10 @@ class HBNBCommand(cmd.Cmd):
             c_name = args[0]
         else:  # class name not present
             print("** class name missing **")
+<<<<<<< HEAD
+=======
+
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
             return
         if c_name not in HBNBCommand.classes:  # class name invalid
             print("** class doesn't exist **")
@@ -296,6 +408,15 @@ class HBNBCommand(cmd.Cmd):
         # determine if key == present
         if key not in storage.all():
             print("** no instance found **")
+<<<<<<< HEAD
+=======
+
+        except AttributeError:
+            print("** attribute name missing **")
+        except ValueError:
+            print("** value missing **")
+
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
             return
 
         # first determine if kwargs or args
@@ -324,6 +445,10 @@ class HBNBCommand(cmd.Cmd):
             # if att_val was not quoted arg
             if not att_val and args[2]:
                 att_val = args[2].partition(' ')[0]
+<<<<<<< HEAD
+=======
+
+>>>>>>> ab4b57f7c28a49cb4745a72e5a66e8263415dc6c
 
             args = [att_name, att_val]
 
