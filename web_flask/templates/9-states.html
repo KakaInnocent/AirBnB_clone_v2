@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<HTML lang="en">
-  <HEAD>
-    <TITLE>HBNB</TITLE>
-  </HEAD>
-  <BODY>
-    {% if items %}
-    <H1>{{Table}}</H1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBNB</title>
+</head>
+<body>
+    {% if state %}
+    <h1>State: {{ state.name }}</h1>
     <H3>Cities:</H3>
-    <UL>
-      {%for item in items.cities | sort(attribute='name')%}
-      <LI>{{ item.id }}: <B>{{ item.name }}</B></LI>
-      {% endfor %}
-    </UL>
+    {% elif states %}
+        <h1>States</h1>
     {% else %}
-    <H1>Not found!</H1>
+    <h1>Not Found!</h1>
     {% endif %}
-  </BODY>
-</HTML>
+    {% if state or states -%}
+        <ul>
+        {%- set vals = states.values() if states else state.cities -%}
+        {% for item in vals|sort(attribute='name') %}
+            <li>{{ item.id }}: <b>{{ item.name }}</b></li>
+        {% endfor %}
+    </ul>
+  {%- endif %}
+</body>
+</html>

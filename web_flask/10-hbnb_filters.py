@@ -1,29 +1,28 @@
 #!/usr/bin/python3
-""" Script that runs an app with Flask framework """
+
+from models import *
 from flask import Flask, render_template
-from models import storage
-from models.state import State
-from models.amenity import Amenity
-
-
 app = Flask(__name__)
 
 
+@app.route('/hbnb_filters')
+def hbnb_filters():
+    all_info = {}
+    states = storage.all("State").values()
+    amenities = storage.all("Amenity").values()
+    for state in states:
+        all_info[state.name] = state
+
+
+    return render_template('10-hbnb_filters.html',
+                           states=all_info,
+                           amenities=amenities)
+
+
 @app.teardown_appcontext
-def teardown_session(exception):
-    """ Teardown """
+def teardown(err):
     storage.close()
 
 
-@app.route('/hbnb_filters/', strict_slashes=False)
-def display_html():
-    """ Function called with /states route """
-    states = storage.all(State)
-    amenities = storage.all(Amenity)
-
-    return render_template('10-hbnb_filters.html',
-                           states=states.values(),
-                           amenities=amenities.values())
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0')
