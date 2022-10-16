@@ -2,26 +2,21 @@
 """test for BaseModel"""
 import unittest
 import os
-<<<<<<< HEAD
 from os import getenv
 from models.base_model import BaseModel
 import pep8
-=======
 import pycodestyle
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
 
 
 class TestBaseModel(unittest.TestCase):
     """this will test the base model class"""
 
-<<<<<<< HEAD
     @classmethod
     def setUpClass(cls):
         """setup for the test"""
         cls.base = BaseModel()
         cls.base.name = "Kev"
         cls.base.num = 20
-=======
     def __init__(self, *args, **kwargs):
         """ """
         super().__init__(*args, **kwargs)
@@ -37,7 +32,6 @@ class TestBaseModel(unittest.TestCase):
         result = pycostyle.check_files(['models/base_model.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
 
     @classmethod
     def teardown(cls):
@@ -51,8 +45,7 @@ class TestBaseModel(unittest.TestCase):
         except Exception:
             pass
 
-<<<<<<< HEAD
-=======
+
     def test_default(self):
         """ """
         i = self.value()
@@ -197,7 +190,6 @@ class TestBaseModel(unittest.TestCase):
         except Exception:
             pass
 
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
     def test_pep8_BaseModel(self):
         """Testing for pep8"""
         style = pep8.StyleGuide(quiet=True)
@@ -222,10 +214,8 @@ class TestBaseModel(unittest.TestCase):
         """test if the base is an type BaseModel"""
         self.assertTrue(isinstance(self.base, BaseModel))
 
-<<<<<<< HEAD
+
     @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
-=======
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
     def test_save_BaesModel(self):
         """test if the save works"""
         self.base.save()

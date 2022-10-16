@@ -4,10 +4,8 @@ import unittest
 import os
 from models.amenity import Amenity
 from models.base_model import BaseModel
-<<<<<<< HEAD
-import pep8
 
-=======
+import pep8
 from datetime import datetime
 from unittest.mock import patch
 from time import sleep
@@ -16,7 +14,6 @@ import pycodestyle
 import inspect
 import unittest
 storage_t = getenv("HBNB_TYPE_STORAGE")
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
 
 class TestAmenity(unittest.TestCase):
     """this will test the Amenity class"""
@@ -27,7 +24,6 @@ class TestAmenity(unittest.TestCase):
         cls.amenity = Amenity()
         cls.amenity.name = "Breakfast"
 
-<<<<<<< HEAD
     @classmethod
     def teardown(cls):
         """at the end of the test this will tear it down"""
@@ -77,7 +73,6 @@ class TestAmenity(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-=======
     def test_name2(self):
         """ """
         new = self.value()
@@ -229,4 +224,3 @@ class TestAmenity(unittest.TestCase):
         amenity = Amenity()
         string = "[Amenity] ({}) {}".format(amenity.id, amenity.__dict__)
         self.assertEqual(string, str(amenity))
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9

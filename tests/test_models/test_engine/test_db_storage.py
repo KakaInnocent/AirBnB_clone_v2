@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
 """test for file storage"""
 import unittest
 import pep8
@@ -84,7 +83,6 @@ class TestDBStorage(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-=======
 """
 Contains the TestDBStorageDocs and TestDBStorage classes
 """
@@ -214,4 +212,3 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9

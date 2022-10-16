@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
-<<<<<<< HEAD
+
     def do_EOF(self, line):
         """Quit command to exit the program at end of file"""
         return True
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
                 if type(attributes[1]) is not tuple:
                     setattr(obj, attributes[0], attributes[1])
             obj.save()
-=======
+
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
@@ -148,13 +148,10 @@ class HBNBCommand(cmd.Cmd):
                 if type(arg_splited[1]) is str:
                     arg_splited[1] = arg_splited[1].replace("_", " ").replace('"', '\\"')
                 kw[arg_splited[0]] = arg_splited[1]
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
         except SyntaxError:
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-<<<<<<< HEAD
-=======
         new_instance = HBNBCommand.classes[arg_list[0]](**kw)
         new_instance.save()
         print(new_instance.id)
@@ -173,7 +170,6 @@ class HBNBCommand(cmd.Cmd):
         # guard against trailing args
         if c_id and ' ' in c_id:
             c_id = c_id.partition(' ')[0]
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
 
     def do_show(self, line):
         """Prints the string representation of an instance
@@ -238,7 +234,6 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
-<<<<<<< HEAD
     def do_all(self, line):
         """Prints all string representation of all instances
         Exceptions:
@@ -250,7 +245,7 @@ class HBNBCommand(cmd.Cmd):
             for key in objects:
                 my_list.append(objects[key])
             print(my_list)
-=======
+
     def help_destroy(self):
         """ Help information for the destroy command """
         print("Destroys an individual instance of a class")
@@ -299,7 +294,7 @@ class HBNBCommand(cmd.Cmd):
             c_name = args[0]
         else:  # class name not present
             print("** class name missing **")
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
+
             return
         try:
             args = line.split(" ")
@@ -353,12 +348,12 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         except KeyError:
             print("** no instance found **")
-<<<<<<< HEAD
+
         except AttributeError:
             print("** attribute name missing **")
         except ValueError:
             print("** value missing **")
-=======
+
             return
 
         # first determine if kwargs or args
@@ -387,7 +382,7 @@ class HBNBCommand(cmd.Cmd):
             # if att_val was not quoted arg
             if not att_val and args[2]:
                 att_val = args[2].partition(' ')[0]
->>>>>>> e2fbbebf3e43dde9c4639195327a72c188eceba9
+
 
     def count(self, line):
         """count the number of instances of a class
